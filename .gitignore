@@ -60,3 +60,6 @@ out/
 
 # VSCode settings specific to your project
 .vscode/*
+
+#Electron-builder output
+/dist_electron
