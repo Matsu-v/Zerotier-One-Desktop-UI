@@ -22,7 +22,9 @@
 <script setup>
 import { useTheme } from 'vuetify'
 import { ref } from 'vue'
+import { useStore } from 'vuex';
 const theme = useTheme()
+const store = useStore()
 // const name = 'NavBar';
 var Drawer = ref(false);
 var DarkMode = ref(true);
@@ -32,6 +34,7 @@ function DarkModeLabel() {
 }
 function SetDarkMode(val) {
     theme.global.name.value = val ? 'dark' : 'light';
+    store.state.darkMode = val;
 }
 function ToggleDrawer() {
     Drawer.value = !Drawer.value
@@ -48,17 +51,6 @@ const Routes = [
         icon:"mdi-table-network"
     }
 ]
-// function Routes() {
-//     let items
-//     this.$router.options.routes.forEach(route => {
-//         this.items.push({
-//             name: route.name
-//             , path: route.path
-//         })
-//     })
-//     return items
-// }
-
 </script>
 <style>
 .titlebar {
