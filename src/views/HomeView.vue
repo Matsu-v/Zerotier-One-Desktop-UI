@@ -1,18 +1,18 @@
 <template>
-  <HelloWorld />
+  <ZerotierStatus />
 </template>
 
 <script>
 import { defineComponent } from 'vue';
 
 // Components
-import HelloWorld from '../components/HelloWorld.vue';
+import ZerotierStatus from '../components/ZerotierStatus.vue';
 
 export default defineComponent({
   name: 'HomeView',
 
   components: {
-    HelloWorld,
+    ZerotierStatus,
   },
 });
 </script>

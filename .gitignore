@@ -63,3 +63,5 @@ out/
 
 #Electron-builder output
 /dist_electron
+
+.env
