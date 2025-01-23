@@ -16,6 +16,14 @@
         </template>
 
         <v-app-bar-title>Zerotier UI</v-app-bar-title>
+        <v-spacer></v-spacer>
+        <!-- <v-divider vertical></v-divider> -->
+        <v-btn @click="minimizeWindow" icon="mdi-window-minimize" style="-webkit-app-region: no-drag;" ></v-btn>
+        <v-divider vertical></v-divider>
+        <v-btn @click="maximizeWindow" icon="mdi-window-maximize" style="-webkit-app-region: no-drag;" ></v-btn>
+        <v-divider vertical></v-divider>
+        <v-btn @click="closeWindow" icon="mdi-window-close" style="-webkit-app-region: no-drag;" ></v-btn>
+        <v-divider vertical></v-divider>
     </v-app-bar>
 </template>
 
@@ -39,16 +47,25 @@ function SetDarkMode(val) {
 function ToggleDrawer() {
     Drawer.value = !Drawer.value
 }
+function minimizeWindow() {
+    window.api.minimizeWindow();
+}
+function maximizeWindow() {
+    window.api.maximizeWindow();
+}
+function closeWindow() {
+    window.api.closeWindow();
+}
 const Routes = [
     {
-        path:"/", 
-        name:"HomePage",
-        icon:"mdi-home"
+        path: "/",
+        name: "HomePage",
+        icon: "mdi-home"
     },
     {
-        path:"/Networks",
-        name:"Networks",
-        icon:"mdi-table-network"
+        path: "/Networks",
+        name: "Networks",
+        icon: "mdi-table-network"
     }
 ]
 </script>

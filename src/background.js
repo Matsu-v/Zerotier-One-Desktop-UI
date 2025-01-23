@@ -68,16 +68,45 @@ app.on('activate', () => {
 app.on('ready', async () => {
   if (isDevelopment && !process.env.IS_TEST) {
     // Install Vue Devtools
-  //   try {
-  //     await installExtension(VUEJS3_DEVTOOLS)
-  //   } catch (e) {
-  //     console.error('Vue Devtools failed to install:', e.toString())
-  //   }
+    //   try {
+    //     await installExtension(VUEJS3_DEVTOOLS)
+    //   } catch (e) {
+    //     console.error('Vue Devtools failed to install:', e.toString())
+    //   }
   }
   createWindow()
 })
 
+const getWindow = () => BrowserWindow.getFocusedWindow();
 
+ipcMain.handle('closeWindow', () => {
+
+  getWindow().close();
+});
+
+ipcMain.handle('minimizeWindow', () => {
+  getWindow().minimize();
+});
+
+ipcMain.handle('maximizeWindow', () => {
+  const window = getWindow();
+  window.isMaximized() ? window.unmaximize() : window.maximize();
+});
+ipcMain.handle('saveNetworkSettings', async (event, { url, token, data }) => {
+  try {
+    const response = await axios.post(url,data, {
+      headers: {
+        "X-ZT1-AUTH": token,
+        Accept: "application/json",
+      },
+    });
+    // console.log('response:', response.data);
+    return response.data; // Retourneer de data naar de renderer-process
+  } catch (err) {
+    console.error('Fout bij ophalen:', err);
+    // throw new Error(err.response?.data || err.message);
+  }
+})
 ipcMain.handle('fetchData', async (event, { url, token }) => {
   try {
     const response = await axios.get(url, {
