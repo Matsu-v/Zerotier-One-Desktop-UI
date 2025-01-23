@@ -92,6 +92,21 @@ ipcMain.handle('maximizeWindow', () => {
   const window = getWindow();
   window.isMaximized() ? window.unmaximize() : window.maximize();
 });
+ipcMain.handle('leaveNetwork', async (event, { url, token }) => {
+  try {
+    const response = await axios.delete(url, {
+      headers: {
+        "X-ZT1-AUTH": token,
+        Accept: "application/json",
+      },
+    });
+    // console.log('response:', response.data);
+    return response.data; // Retourneer de data naar de renderer-process
+  } catch (err) {
+    console.error('Fout bij ophalen:', err);
+    // throw new Error(err.response?.data || err.message);
+  }
+})
 ipcMain.handle('saveNetworkSettings', async (event, { url, token, data }) => {
   try {
     const response = await axios.post(url,data, {

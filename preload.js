@@ -6,4 +6,5 @@ contextBridge.exposeInMainWorld('api', {
   minimizeWindow: () => ipcRenderer.invoke('minimizeWindow'),
   maximizeWindow: () => ipcRenderer.invoke('maximizeWindow'),
   saveNetworkSettings: (url, token, data ) => ipcRenderer.invoke('saveNetworkSettings', { url, token, data }),
+  leaveNetwork: (url, token ) => ipcRenderer.invoke('leaveNetwork', { url, token }),
 });
